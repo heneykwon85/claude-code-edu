@@ -34,7 +34,7 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-bold text-heading leading-[1.1] tracking-tight mb-8">
             코딩의 새로운
             <br />
-            <span className="gradient-text">패러다임</span>
+            <span className="text-heading">패러다임</span>
           </h1>
           <p className="text-lg md:text-xl text-muted max-w-xl mx-auto mb-12 leading-relaxed">
             AI와 대화하며 코드를 작성하고, 버그를 수정하고, 프로젝트를 관리하세요.
