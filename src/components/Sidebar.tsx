@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 const navigation = [
   {
@@ -68,13 +68,7 @@ export default function Sidebar({
         {/* Logo */}
         <div className="sidebar-section-border px-6 py-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3" onClick={onClose}>
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={28}
-              height={28}
-              className="dark:invert"
-            />
+            <Logo width={28} height={28} />
             <div>
               <h1 className="text-sm font-semibold sidebar-heading tracking-wide">NEXT Academy</h1>
               <p className="text-[10px] sidebar-dim tracking-widest uppercase">Claude Code 101</p>

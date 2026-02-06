@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Logo from "@/components/Logo";
 
 const features = [
   { title: "빠른 설치", description: "한 줄의 명령어로 설치 완료. 5분 안에 시작할 수 있습니다.", href: "/docs/installation" },
@@ -26,7 +27,7 @@ export default function Home() {
         </div>
         <div className="relative max-w-3xl mx-auto px-6 text-center">
           <div className="mb-8">
-            <Image src="/logo.png" alt="Logo" width={48} height={48} className="mx-auto dark:invert opacity-60" />
+            <Logo width={48} height={48} className="mx-auto opacity-60" />
           </div>
           <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-accent mb-8">
             Claude Code Workshop 2026
@@ -141,7 +142,7 @@ export default function Home() {
       <footer className="border-t border-edge py-10">
         <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="Logo" width={18} height={18} className="dark:invert opacity-50" />
+            <Logo width={18} height={18} className="opacity-50" />
             <span className="text-[12px] text-dim tracking-wide">Claude Code Workshop 2026</span>
           </div>
           <p className="text-[12px] text-dim/50">AI와 함께하는 새로운 코딩 경험</p>
