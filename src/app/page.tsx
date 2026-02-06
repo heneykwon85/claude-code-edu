@@ -27,15 +27,15 @@ export default function Home() {
         </div>
         <div className="relative max-w-3xl mx-auto px-6 text-center">
           <div className="mb-8">
-            <Logo width={48} height={48} className="mx-auto opacity-60" />
+            <Logo width={120} height={120} className="mx-auto opacity-80" />
           </div>
           <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-accent mb-8">
             Claude Code Workshop 2026
           </p>
           <h1 className="text-5xl md:text-7xl font-bold text-heading leading-[1.1] tracking-tight mb-8">
-            코딩의 새로운
+            AI와 데이터로
             <br />
-            <span className="text-heading">패러다임</span>
+            더 똑똑하게 일해요
           </h1>
           <p className="text-lg md:text-xl text-muted max-w-xl mx-auto mb-12 leading-relaxed">
             AI와 대화하며 코드를 작성하고, 버그를 수정하고, 프로젝트를 관리하세요.

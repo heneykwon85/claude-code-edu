@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "./ThemeToggle";
-import Logo from "./Logo";
 
 export default function ClientLayout({
   children,
@@ -30,7 +30,7 @@ export default function ClientLayout({
               </svg>
             </button>
             <div className="flex items-center gap-2">
-              <Logo width={20} height={20} />
+              <Image src="/logo-sidebar.png" alt="Logo" width={24} height={24} className="rounded" />
               <span className="text-sm font-medium text-heading tracking-wide">NEXT Academy</span>
             </div>
             <ThemeToggle compact />
