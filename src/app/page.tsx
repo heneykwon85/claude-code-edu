@@ -38,7 +38,9 @@ export default function Home() {
             더 똑똑하게 일해요
           </h1>
           <p className="text-lg md:text-xl text-muted max-w-xl mx-auto mb-12 leading-relaxed">
-            AI와 대화하며 코드를 작성하고, 버그를 수정하고, 프로젝트를 관리하세요.
+            반복 업무는 AI와 자동화에 맡기고,
+            <br />
+            새로운 기술과 도구는 적극적으로 검토하고 업무에 반영하세요.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

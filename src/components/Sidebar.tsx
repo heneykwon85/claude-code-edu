@@ -68,7 +68,8 @@ export default function Sidebar({
         {/* Logo */}
         <div className="sidebar-section-border px-6 py-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3" onClick={onClose}>
-            <Image src="/logo-sidebar.png" alt="Logo" width={32} height={32} className="rounded" />
+            <Image src="/logo-sidebar-light.png" alt="Logo" width={32} height={32} className="rounded block dark:hidden" />
+            <Image src="/logo-sidebar.png" alt="Logo" width={32} height={32} className="rounded hidden dark:block" />
             <div>
               <h1 className="text-sm font-semibold sidebar-heading tracking-wide">NEXT Academy</h1>
               <p className="text-[10px] sidebar-dim tracking-widest uppercase">Claude Code 101</p>

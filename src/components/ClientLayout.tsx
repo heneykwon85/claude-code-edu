@@ -30,7 +30,8 @@ export default function ClientLayout({
               </svg>
             </button>
             <div className="flex items-center gap-2">
-              <Image src="/logo-sidebar.png" alt="Logo" width={24} height={24} className="rounded" />
+              <Image src="/logo-sidebar-light.png" alt="Logo" width={24} height={24} className="rounded block dark:hidden" />
+              <Image src="/logo-sidebar.png" alt="Logo" width={24} height={24} className="rounded hidden dark:block" />
               <span className="text-sm font-medium text-heading tracking-wide">NEXT Academy</span>
             </div>
             <ThemeToggle compact />
