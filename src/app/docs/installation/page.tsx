@@ -224,8 +224,26 @@ export default function InstallationPage() {
         </div>
       </section>
 
-      {/* Video Section */}
-      <VideoSection title="영상으로 따라하기">
+      {/* Video Section - Korean */}
+      <VideoSection title="한국어 영상으로 따라하기">
+        <div className="grid md:grid-cols-2 gap-4">
+          <YouTubeEmbed
+            videoId="1bw5flB9IJ8"
+            title="Claude Code 완벽 설치 방법 (Windows)"
+            channel="한국어"
+            description="Windows 환경에서 Claude Code를 설치하고 설정하는 방법을 단계별로 안내합니다."
+          />
+          <YouTubeEmbed
+            videoId="bTMs71I2vO8"
+            title="AI 바이브코딩 3대장 비교: 클로드 코드 vs 커서 AI vs Gemini CLI"
+            channel="한국어"
+            description="2025 AI 코딩 도구 비교 영상. Claude Code의 설치부터 실제 사용까지 살펴봅니다."
+          />
+        </div>
+      </VideoSection>
+
+      {/* Video Section - English */}
+      <VideoSection title="영문 영상으로 따라하기">
         <div className="grid md:grid-cols-2 gap-4">
           <YouTubeEmbed
             videoId="eMZmDH3T2bY"

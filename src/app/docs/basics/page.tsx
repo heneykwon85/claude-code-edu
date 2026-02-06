@@ -270,8 +270,26 @@ claude --resume`}
         </div>
       </section>
 
-      {/* Video Section */}
-      <VideoSection>
+      {/* Video Section - Korean */}
+      <VideoSection title="한국어 영상으로 배우기">
+        <div className="grid md:grid-cols-2 gap-4">
+          <YouTubeEmbed
+            videoId="kiY2yo1Wx64"
+            title="비개발자도 가능한 바이브 코딩 8분 튜토리얼"
+            channel="한국어"
+            description="AI에게 말을 걸어 1시간 만에 웹사이트를 완성하는 실제 과정을 보여줍니다."
+          />
+          <YouTubeEmbed
+            videoId="H0Bux5SIkGs"
+            title="Cursor + Claude로 진짜 Vibe Coding 세팅하기"
+            channel="한국어"
+            description="Claude와 Cursor를 함께 활용하는 실전 바이브 코딩 세팅 방법을 알려줍니다."
+          />
+        </div>
+      </VideoSection>
+
+      {/* Video Section - English */}
+      <VideoSection title="영문 영상으로 배우기">
         <div className="grid md:grid-cols-2 gap-4">
           <YouTubeEmbed
             videoId="AJpK3YTTKZ4"

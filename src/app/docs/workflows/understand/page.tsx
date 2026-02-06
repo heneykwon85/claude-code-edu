@@ -67,8 +67,26 @@ export default function UnderstandPage() {
         />
       </section>
 
-      {/* Video Section */}
-      <VideoSection>
+      {/* Video Section - Korean */}
+      <VideoSection title="한국어 영상으로 배우기">
+        <div className="grid md:grid-cols-2 gap-4">
+          <YouTubeEmbed
+            videoId="fkqXQOjj8cA"
+            title="MCP써야 진짜 Claude다! 500% 활용 튜토리얼"
+            channel="한국어"
+            description="Claude의 MCP 개념부터 실전 활용까지. 프로젝트 분석과 외부 도구 연동 방법을 알려줍니다."
+          />
+          <YouTubeEmbed
+            videoId="lYG3Afvw5tw"
+            title="더욱 강력해진 클로드 프로젝트 업데이트 사용방법"
+            channel="한국어"
+            description="Claude의 프로젝트 기능을 활용하여 코드를 분석하고 이해하는 방법을 소개합니다."
+          />
+        </div>
+      </VideoSection>
+
+      {/* Video Section - English */}
+      <VideoSection title="영문 영상으로 배우기">
         <YouTubeEmbed
           videoId="AJpK3YTTKZ4"
           title="Introducing Claude Code - 코드베이스 분석 데모"
