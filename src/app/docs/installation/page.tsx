@@ -1,264 +1,439 @@
 import PageHeader from "@/components/PageHeader";
 import StepCard from "@/components/StepCard";
 import CodeBlock from "@/components/CodeBlock";
-import YouTubeEmbed, { VideoSection } from "@/components/YouTubeEmbed";
 import Link from "next/link";
 
 export default function InstallationPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <PageHeader
-        badge="Level 1 · 시작하기"
-        title="사전 설치 가이드"
-        description="Claude Code를 사용하기 위한 환경을 준비합니다. 약 5분이면 충분합니다."
+        badge="워크샵 사전 준비 · 소요 시간 15분"
+        title="Claude Code 설치 가이드"
+        description="본인 컴퓨터가 Mac인지 Windows인지 확인 후, 해당 섹션만 따라하세요."
       />
 
-      {/* System Requirements */}
+      {/* GitHub 계정 만들기 */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-heading mb-6">시스템 요구사항</h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {[
-            {
-              icon: "💻",
-              title: "운영체제",
-              detail: "macOS 13.0+, Ubuntu 20.04+, Windows 10+",
-            },
-            {
-              icon: "🧠",
-              title: "메모리",
-              detail: "최소 4GB RAM",
-            },
-            {
-              icon: "🌐",
-              title: "네트워크",
-              detail: "인터넷 연결 필수 (API 통신)",
-            },
-            {
-              icon: "📦",
-              title: "Node.js (선택)",
-              detail: "npm 설치 시 Node.js 18+ 필요",
-            },
-          ].map((req) => (
-            <div
-              key={req.title}
-              className="bg-surface-alt rounded-xl p-4 flex items-start gap-3 border border-edge"
-            >
-              <span className="text-2xl">{req.icon}</span>
-              <div>
-                <h3 className="font-semibold text-heading text-sm">
-                  {req.title}
-                </h3>
-                <p className="text-sm text-dim">{req.detail}</p>
-              </div>
+        <h2 className="text-2xl font-bold text-heading mb-4">GitHub 계정 만들기</h2>
+        <div className="tip-box mb-6">
+          <p className="text-sm text-accent">
+            팀 협업 및 코드 공유를 위해 필요합니다.
+          </p>
+        </div>
+        <div className="space-y-6">
+          <StepCard
+            step={1}
+            title="GitHub 가입"
+            description="GitHub에 계정을 만드세요."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  github.com
+                </a>{" "}접속
+              </li>
+              <li><strong className="text-heading">Sign up</strong> 클릭</li>
+              <li><strong className="text-heading">Continue with Google</strong> 클릭 → 본인 Google 계정으로 로그인</li>
+              <li>이메일 인증 완료</li>
+            </ol>
+            <div className="info-box mt-4">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 Google로 가입하면 비밀번호 관리가 편하고, Vercel 등 다른 개발 서비스 가입 시에도 유용합니다.
+              </p>
             </div>
-          ))}
+          </StepCard>
         </div>
       </section>
 
-      {/* Installation Steps */}
+      {/* ===== Mac 유저 ===== */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-heading mb-6">설치 방법</h2>
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-3xl">🍎</span>
+          <h2 className="text-2xl font-bold text-heading">Mac 유저</h2>
+        </div>
 
-        <div className="tip-box mb-6">
-          <p className="text-sm text-accent">
-            <strong>💡 팁:</strong> 가장 쉬운 방법은 네이티브 설치(curl)입니다.
-            Node.js가 없어도 설치할 수 있습니다.
+        <div className="space-y-6">
+          <StepCard
+            step={1}
+            title="Claude 계정 만들기"
+            description="Claude AI 계정을 생성하고 구독합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>
+                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  claude.ai
+                </a>{" "}접속
+              </li>
+              <li>계정 생성 후 <strong className="text-heading">Pro 또는 Max</strong> 구독</li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={2}
+            title="VS Code 설치"
+            description="코드 편집기를 설치합니다."
+          >
+            <div className="info-box mb-4">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 이미 <strong>Cursor</strong> 또는 <strong>Antigravity</strong> 쓰시는 분은 이 단계 건너뛰세요!
+              </p>
+            </div>
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>
+                <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  code.visualstudio.com
+                </a>{" "}접속
+              </li>
+              <li><strong className="text-heading">Mac</strong> 버전 다운로드</li>
+              <li>다운로드된 파일 실행 → 응용 프로그램 폴더로 드래그</li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={3}
+            title="Claude Code 설치 (CLI)"
+            description="터미널에서 Claude Code를 설치합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-3">
+              <li>
+                VS Code 상단 메뉴에서 <strong className="text-heading">Terminal</strong> → <strong className="text-heading">New Terminal</strong> 클릭
+                <div className="info-box mt-2 ml-4">
+                  <p className="text-sm text-blue-500 dark:text-blue-300">
+                    💡 단축키: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">Ctrl + `</code> (백틱, 숫자 1 왼쪽 키)
+                  </p>
+                </div>
+              </li>
+              <li>
+                아래 명령어 복사 → 터미널에 붙여넣기 → Enter
+                <div className="ml-4 mt-2">
+                  <CodeBlock
+                    code="curl -fsSL https://claude.ai/install.sh | bash"
+                    language="bash"
+                  />
+                </div>
+              </li>
+              <li>VS Code 완전히 종료 후 다시 열기</li>
+              <li>
+                터미널에서 확인: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">claude --version</code> 입력 → 버전 나오면 성공
+              </li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={4}
+            title="Claude Code 로그인 (CLI)"
+            description="터미널에서 Claude Code에 로그인합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>터미널에 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">claude</code> 입력 → Enter</li>
+              <li>브라우저가 자동으로 열림 → Claude 계정으로 로그인</li>
+              <li><strong className="text-heading">허용</strong> 클릭</li>
+              <li>터미널로 돌아와서 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">안녕하세요</code> 입력 → 응답 오면 <strong className="text-heading">CLI 설정 완료!</strong></li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={5}
+            title="Claude Extension 설치 (VS Code)"
+            description="VS Code에서 Claude 확장 프로그램을 설치합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-3">
+              <li>
+                VS Code 왼쪽 사이드바에서 <strong className="text-heading">Extensions</strong> 아이콘 클릭 (네모 4개 모양)
+                <div className="info-box mt-2 ml-4">
+                  <p className="text-sm text-blue-500 dark:text-blue-300">
+                    💡 단축키: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">Cmd + Shift + X</code>
+                  </p>
+                </div>
+              </li>
+              <li>검색창에 <strong className="text-heading">Claude</strong> 입력</li>
+              <li><strong className="text-heading">Anthropic</strong> 제작 확인 후 <strong className="text-heading">Install</strong> 클릭</li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={6}
+            title="Extension 로그인"
+            description="설치한 Claude Extension에 로그인합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>VS Code 왼쪽 사이드바에서 <strong className="text-heading">Claude 아이콘</strong> 클릭 (방금 설치한 Extension)</li>
+              <li><strong className="text-heading">Sign In</strong> 버튼 클릭</li>
+              <li>브라우저에서 Claude 계정 로그인 → <strong className="text-heading">허용</strong> 클릭</li>
+              <li>Claude 패널에 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">안녕하세요</code> 입력 → 응답 오면 <strong className="text-heading">완료!</strong></li>
+            </ol>
+          </StepCard>
+        </div>
+      </section>
+
+      {/* ===== Windows 유저 ===== */}
+      <section className="mb-12">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-3xl">🪟</span>
+          <h2 className="text-2xl font-bold text-heading">Windows 유저</h2>
+        </div>
+
+        <div className="space-y-6">
+          <StepCard
+            step={1}
+            title="Claude 계정 만들기"
+            description="Claude AI 계정을 생성하고 구독합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>
+                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  claude.ai
+                </a>{" "}접속
+              </li>
+              <li>계정 생성 후 <strong className="text-heading">Pro 또는 Max</strong> 구독</li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={2}
+            title="VS Code 설치"
+            description="코드 편집기를 설치합니다."
+          >
+            <div className="info-box mb-4">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 이미 <strong>Cursor</strong> 또는 <strong>Antigravity</strong> 쓰시는 분은 이 단계 건너뛰세요!
+              </p>
+            </div>
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>
+                <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  code.visualstudio.com
+                </a>{" "}접속
+              </li>
+              <li><strong className="text-heading">Windows</strong> 버전 다운로드</li>
+              <li>다운로드된 파일 실행 → 기본값으로 설치</li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={3}
+            title="Claude Code 설치 (CLI)"
+            description="터미널에서 Claude Code를 설치합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-3">
+              <li>
+                VS Code 상단 메뉴에서 <strong className="text-heading">Terminal</strong> → <strong className="text-heading">New Terminal</strong> 클릭
+                <div className="info-box mt-2 ml-4">
+                  <p className="text-sm text-blue-500 dark:text-blue-300">
+                    💡 단축키: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">Ctrl + `</code> (백틱, 숫자 1 왼쪽 키)
+                  </p>
+                </div>
+              </li>
+              <li>
+                아래 명령어 복사 → 터미널에 <strong className="text-heading">마우스 우클릭</strong>으로 붙여넣기 → Enter
+                <div className="ml-4 mt-2">
+                  <CodeBlock
+                    code="irm https://claude.ai/install.ps1 | iex"
+                    language="powershell"
+                  />
+                </div>
+              </li>
+              <li>VS Code 완전히 종료 후 다시 열기</li>
+              <li>
+                터미널에서 확인: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">claude --version</code> 입력 → 버전 나오면 성공
+              </li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={4}
+            title="Claude Code 로그인 (CLI)"
+            description="터미널에서 Claude Code에 로그인합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>터미널에 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">claude</code> 입력 → Enter</li>
+              <li>브라우저가 자동으로 열림 → Claude 계정으로 로그인</li>
+              <li><strong className="text-heading">허용</strong> 클릭</li>
+              <li>터미널로 돌아와서 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">안녕하세요</code> 입력 → 응답 오면 <strong className="text-heading">CLI 설정 완료!</strong></li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={5}
+            title="Claude Extension 설치 (VS Code)"
+            description="VS Code에서 Claude 확장 프로그램을 설치합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-3">
+              <li>
+                VS Code 왼쪽 사이드바에서 <strong className="text-heading">Extensions</strong> 아이콘 클릭 (네모 4개 모양)
+                <div className="info-box mt-2 ml-4">
+                  <p className="text-sm text-blue-500 dark:text-blue-300">
+                    💡 단축키: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">Ctrl + Shift + X</code>
+                  </p>
+                </div>
+              </li>
+              <li>검색창에 <strong className="text-heading">Claude</strong> 입력</li>
+              <li><strong className="text-heading">Anthropic</strong> 제작 확인 후 <strong className="text-heading">Install</strong> 클릭</li>
+            </ol>
+          </StepCard>
+
+          <StepCard
+            step={6}
+            title="Extension 로그인"
+            description="설치한 Claude Extension에 로그인합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>VS Code 왼쪽 사이드바에서 <strong className="text-heading">Claude 아이콘</strong> 클릭 (방금 설치한 Extension)</li>
+              <li><strong className="text-heading">Sign In</strong> 버튼 클릭</li>
+              <li>브라우저에서 Claude 계정 로그인 → <strong className="text-heading">허용</strong> 클릭</li>
+              <li>Claude 패널에 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">안녕하세요</code> 입력 → 응답 오면 <strong className="text-heading">완료!</strong></li>
+            </ol>
+          </StepCard>
+        </div>
+      </section>
+
+      {/* 문제 해결 */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-6">문제 해결</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-edge">
+                <th className="text-left py-3 px-4 text-heading font-semibold bg-surface-alt rounded-tl-lg">증상</th>
+                <th className="text-left py-3 px-4 text-heading font-semibold bg-surface-alt rounded-tr-lg">해결</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { symptom: "claude 명령어가 안 됨", solution: "VS Code 완전히 종료 후 재시작" },
+                { symptom: "브라우저 로그인 후 터미널 반응 없음", solution: '브라우저에서 "허용" 클릭 확인' },
+                { symptom: "Extension이 안 보임", solution: "VS Code 재시작" },
+                { symptom: "로그인이 안 됨", solution: "브라우저 팝업 차단 해제" },
+                { symptom: "응답이 안 옴", solution: "Claude 구독 상태 확인" },
+              ].map((row) => (
+                <tr key={row.symptom} className="border-b border-edge hover:bg-surface-alt/50 transition-colors">
+                  <td className="py-3 px-4 text-muted">
+                    <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">{row.symptom}</code>
+                  </td>
+                  <td className="py-3 px-4 text-muted">{row.solution}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-4 p-4 bg-panel border border-edge rounded-lg">
+          <p className="text-sm text-muted">
+            <strong className="text-heading">해결 안 되면</strong>: 워크샵 당일 12:30에 도움드립니다.
+          </p>
+        </div>
+      </section>
+
+      {/* 워크샵 사전 스킬 설치 & 실행 */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-4">워크샵 사전 스킬 설치 & 실행</h2>
+        <div className="warning-box mb-6">
+          <p className="text-sm">
+            🎯 <strong className="text-heading">필수!</strong> 워크샵 전에 이 스킬로 본인 업무를 정리하고, 만들 스킬 설계서를 받아오세요.
           </p>
         </div>
 
         <div className="space-y-6">
           <StepCard
             step={1}
-            title="방법 1: 네이티브 설치 (권장)"
-            description="운영체제에 맞는 명령어를 터미널에 붙여넣으세요."
+            title="사전 스킬 설치"
+            description="터미널에서 아래 명령어를 실행하세요."
           >
-            <div className="space-y-3">
-              <p className="text-xs font-semibold text-dim uppercase tracking-wide">
-                macOS / Linux
+            <CodeBlock
+              code="claude install github:next-company/cc-skill-workshop/skills/workshop-prep"
+              language="bash"
+            />
+            <div className="info-box mt-4">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">claude install</code>은 GitHub에서 스킬을 다운받아 설치하는 명령어입니다.
               </p>
-              <CodeBlock
-                code="curl -fsSL https://claude.ai/install.sh | bash"
-                language="bash"
-              />
-              <p className="text-xs font-semibold text-dim uppercase tracking-wide mt-4">
-                Windows (PowerShell)
-              </p>
-              <CodeBlock
-                code="irm https://claude.ai/install.ps1 | iex"
-                language="powershell"
-              />
             </div>
           </StepCard>
 
           <StepCard
             step={2}
-            title="방법 2: Homebrew (macOS)"
-            description="macOS 사용자라면 Homebrew로도 설치할 수 있습니다."
+            title="스킬 실행"
+            description="터미널에서 claude 실행 후 아래 명령어를 입력하세요."
           >
             <CodeBlock
-              code="brew install --cask claude-code"
+              code="/workshop-prep"
               language="bash"
+              filename="Claude Code 대화 중 입력"
             />
-          </StepCard>
-
-          <StepCard
-            step={3}
-            title="방법 3: npm (Node.js 필요)"
-            description="Node.js가 이미 설치되어 있다면 npm으로 설치할 수 있습니다."
-          >
+            <p className="text-sm text-muted mt-3">또는 자연스럽게:</p>
             <CodeBlock
-              code="npm install -g @anthropic-ai/claude-code"
-              language="bash"
-            />
-          </StepCard>
-
-          <StepCard
-            step={4}
-            title="방법 4: WinGet (Windows)"
-            description="Windows 패키지 관리자로도 설치 가능합니다."
-          >
-            <CodeBlock
-              code="winget install Anthropic.ClaudeCode"
-              language="powershell"
-            />
-          </StepCard>
-        </div>
-      </section>
-
-      {/* Verify Installation */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-heading mb-6">설치 확인</h2>
-        <StepCard
-          step={1}
-          title="버전 확인"
-          description="설치가 완료되면 아래 명령어로 정상 설치를 확인하세요."
-        >
-          <CodeBlock code="claude --version" language="bash" />
-          <div className="info-box mt-4">
-            <p className="text-sm text-blue-500 dark:text-blue-300">
-              <strong>ℹ️ 참고:</strong> 버전 번호가 출력되면 설치가 성공한 것입니다.
-              오류가 발생하면 터미널을 재시작해보세요.
-            </p>
-          </div>
-        </StepCard>
-      </section>
-
-      {/* Authentication */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-heading mb-6">인증 (로그인)</h2>
-        <p className="text-muted mb-6">
-          Claude Code를 사용하려면 Anthropic 계정이 필요합니다.
-          아래 중 하나의 방법으로 인증할 수 있습니다.
-        </p>
-        <div className="space-y-4">
-          {[
-            {
-              title: "Claude Pro/Max 구독",
-              desc: "claude.ai에서 Pro 또는 Max 플랜을 구독하면 바로 사용 가능합니다.",
-              recommended: true,
-            },
-            {
-              title: "Anthropic Console (API Key)",
-              desc: "console.anthropic.com에서 API Key를 생성하여 사용할 수 있습니다.",
-              recommended: false,
-            },
-            {
-              title: "기업용 플랫폼",
-              desc: "AWS Bedrock, Google Vertex AI 등 기업용 플랫폼을 통해 연결할 수 있습니다.",
-              recommended: false,
-            },
-          ].map((method) => (
-            <div
-              key={method.title}
-              className={`bg-panel rounded-xl p-5 border ${
-                method.recommended
-                  ? "border-accent/30 ring-1 ring-accent/10"
-                  : "border-edge"
-              }`}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="font-semibold text-heading">{method.title}</h3>
-                {method.recommended && (
-                  <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent rounded-full font-medium">
-                    추천
-                  </span>
-                )}
-              </div>
-              <p className="text-sm text-dim">{method.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* First Run */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-heading mb-6">처음 실행하기</h2>
-        <div className="space-y-6">
-          <StepCard
-            step={1}
-            title="프로젝트 폴더로 이동"
-            description="작업하려는 프로젝트의 루트 폴더로 이동합니다."
-          >
-            <CodeBlock code="cd my-project" language="bash" />
-          </StepCard>
-
-          <StepCard
-            step={2}
-            title="Claude Code 시작"
-            description="터미널에 claude를 입력하면 대화형 세션이 시작됩니다."
-          >
-            <CodeBlock code="claude" language="bash" />
-          </StepCard>
-
-          <StepCard
-            step={3}
-            title="프로젝트 초기화 (선택)"
-            description="/init 명령어로 CLAUDE.md 파일을 자동 생성할 수 있습니다. 이 파일에 프로젝트 정보를 저장하면 매 대화마다 컨텍스트를 유지할 수 있습니다."
-          >
-            <CodeBlock
-              code="/init"
+              code="워크샵 준비 도와줘"
               language="bash"
               filename="Claude Code 대화 중 입력"
             />
           </StepCard>
+
+          <StepCard
+            step={3}
+            title="대화 따라가기"
+            description="스킬이 몇 가지 질문을 합니다."
+          >
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>현재 하시는 일 (직무/역할)</li>
+              <li>반복적으로 하는 작업</li>
+              <li>가장 귀찮은/시간 걸리는 작업</li>
+              <li>현재 프로세스 (시작 → 끝)</li>
+              <li>이상적인 자동화 결과</li>
+            </ol>
+            <div className="tip-box mt-4">
+              <p className="text-sm text-accent">
+                <strong>솔직하고 구체적으로</strong> 답변해주세요!
+              </p>
+            </div>
+          </StepCard>
+
+          <StepCard
+            step={4}
+            title="설계서 저장"
+            description="대화가 끝나면 스킬 설계서가 생성됩니다. 이 설계서를 워크샵 당일 가져오세요!"
+          >
+            <p className="text-sm text-muted mb-2">저장 방법:</p>
+            <ul className="list-disc list-inside text-sm text-muted space-y-2">
+              <li>복사해서 노트앱에 붙여넣기</li>
+              <li>또는 파일로 저장 요청: <code className="px-1.5 py-0.5 bg-surface-alt rounded text-xs font-mono">이거 파일로 저장해줘</code></li>
+            </ul>
+          </StepCard>
         </div>
       </section>
 
-      {/* Video Section - Korean */}
-      <VideoSection title="한국어 영상으로 따라하기">
-        <div className="grid md:grid-cols-2 gap-4">
-          <YouTubeEmbed
-            videoId="1bw5flB9IJ8"
-            title="Claude Code 완벽 설치 방법 (Windows)"
-            channel="한국어"
-            description="Windows 환경에서 Claude Code를 설치하고 설정하는 방법을 단계별로 안내합니다."
-          />
-          <YouTubeEmbed
-            videoId="bTMs71I2vO8"
-            title="AI 바이브코딩 3대장 비교: 클로드 코드 vs 커서 AI vs Gemini CLI"
-            channel="한국어"
-            description="2025 AI 코딩 도구 비교 영상. Claude Code의 설치부터 실제 사용까지 살펴봅니다."
-          />
+      {/* 참고 문서 */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-6">참고 문서</h2>
+        <div className="space-y-3">
+          {[
+            {
+              title: "Claude Code 공식 설치 가이드 (한국어)",
+              url: "https://code.claude.com/docs/ko/setup",
+              icon: "📘",
+            },
+            {
+              title: "왕초보를 위한 Claude Code 설치 방법",
+              url: "https://mildit.tistory.com/25",
+              icon: "📝",
+            },
+          ].map((doc) => (
+            <a
+              key={doc.url}
+              href={doc.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-panel border border-edge rounded-lg hover:border-accent/30 transition-colors group"
+            >
+              <span className="text-xl">{doc.icon}</span>
+              <span className="text-sm font-medium text-heading group-hover:text-accent transition-colors">
+                {doc.title}
+              </span>
+              <svg className="w-4 h-4 ml-auto text-dim group-hover:text-accent transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          ))}
         </div>
-      </VideoSection>
-
-      {/* Video Section - English */}
-      <VideoSection title="영문 영상으로 따라하기">
-        <div className="grid md:grid-cols-2 gap-4">
-          <YouTubeEmbed
-            videoId="eMZmDH3T2bY"
-            title="Claude Code Tutorial for Beginners"
-            channel="Kevin Stratvert"
-            description="설치부터 첫 프로젝트까지 초보자를 위한 전체 과정을 안내합니다."
-          />
-          <YouTubeEmbed
-            videoId="dRaHQRxJAEs"
-            title="Anthropic Claude Code in 15 Minutes"
-            channel="Prompt Engineering"
-            description="15분 만에 Claude Code 설치, 인증, 코드 생성까지 빠르게 살펴봅니다."
-          />
-        </div>
-      </VideoSection>
+      </section>
 
       {/* Navigation */}
       <div className="flex justify-between items-center pt-8 border-t border-edge">
@@ -272,10 +447,10 @@ export default function InstallationPage() {
           홈으로
         </Link>
         <Link
-          href="/docs/basics"
+          href="/docs/skills"
           className="px-6 py-2.5 bg-btn text-btn-text text-sm font-medium hover:bg-btn-hover transition-colors flex items-center gap-2"
         >
-          다음: 기본 사용법
+          다음: 스킬 개념 &amp; 실습
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

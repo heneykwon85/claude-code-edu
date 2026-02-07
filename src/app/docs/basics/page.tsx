@@ -310,13 +310,13 @@ claude --resume`}
       {/* Navigation */}
       <div className="flex justify-between items-center pt-8 border-t border-edge">
         <Link
-          href="/docs/installation"
+          href="/docs/skills"
           className="text-sm text-dim hover:text-heading transition-colors flex items-center gap-1"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          이전: 사전 설치
+          이전: 스킬 개념 &amp; 실습
         </Link>
         <Link
           href="/docs/workflows/understand"

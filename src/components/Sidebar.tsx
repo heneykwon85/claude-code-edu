@@ -11,6 +11,7 @@ const navigation = [
     items: [
       { name: "소개", href: "/" },
       { name: "사전 설치", href: "/docs/installation" },
+      { name: "스킬 개념 & 실습", href: "/docs/skills" },
       { name: "기본 사용법", href: "/docs/basics" },
     ],
   },
