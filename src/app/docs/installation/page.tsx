@@ -1,6 +1,7 @@
 import PageHeader from "@/components/PageHeader";
 import StepCard from "@/components/StepCard";
 import CodeBlock from "@/components/CodeBlock";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function InstallationPage() {
@@ -149,6 +150,18 @@ export default function InstallationPage() {
               <li>검색창에 <strong className="text-heading">Claude</strong> 입력</li>
               <li><strong className="text-heading">Anthropic</strong> 제작 확인 후 <strong className="text-heading">Install</strong> 클릭</li>
             </ol>
+            <div className="mt-4 rounded-xl overflow-hidden border border-edge">
+              <Image
+                src="/claude-extension-vscode.png"
+                alt="VS Code에서 Claude Extension 검색 및 설치 화면"
+                width={800}
+                height={500}
+                className="w-full h-auto"
+              />
+            </div>
+            <p className="text-xs text-dim mt-2 text-center">
+              VS Code Extensions에서 &quot;Claude&quot;를 검색하여 Anthropic 공식 확장을 설치합니다.
+            </p>
           </StepCard>
 
           <StepCard
@@ -270,6 +283,18 @@ export default function InstallationPage() {
               <li>검색창에 <strong className="text-heading">Claude</strong> 입력</li>
               <li><strong className="text-heading">Anthropic</strong> 제작 확인 후 <strong className="text-heading">Install</strong> 클릭</li>
             </ol>
+            <div className="mt-4 rounded-xl overflow-hidden border border-edge">
+              <Image
+                src="/claude-extension-vscode.png"
+                alt="VS Code에서 Claude Extension 검색 및 설치 화면"
+                width={800}
+                height={500}
+                className="w-full h-auto"
+              />
+            </div>
+            <p className="text-xs text-dim mt-2 text-center">
+              VS Code Extensions에서 &quot;Claude&quot;를 검색하여 Anthropic 공식 확장을 설치합니다.
+            </p>
           </StepCard>
 
           <StepCard
