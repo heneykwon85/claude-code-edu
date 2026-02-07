@@ -241,6 +241,177 @@ claude mcp add lark -- npx -y @larksuiteoapi/lark-mcp mcp \\
       </section>
 
       <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-6">실습 6: Google Sheets MCP 설치</h2>
+        <p className="text-muted mb-4">
+          Google Sheets MCP는 Claude Code에서 <strong className="text-heading">구글 스프레드시트를 읽고, 쓰고, 관리</strong>할 수 있게 해줍니다.
+          데이터 분석, 보고서 자동 생성, 시트 업데이트 등에 활용할 수 있습니다.
+        </p>
+
+        <div className="space-y-6">
+          <StepCard step={1} title="Google Cloud 프로젝트 설정" description="Google Sheets API를 사용하기 위한 사전 준비를 합니다.">
+            <ol className="list-decimal list-inside text-sm text-muted space-y-3">
+              <li>
+                <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  console.cloud.google.com
+                </a>{" "}접속 후 새 프로젝트 생성 (또는 기존 프로젝트 선택)
+              </li>
+              <li>
+                <strong className="text-heading">API 및 서비스</strong> → <strong className="text-heading">라이브러리</strong>에서 아래 2개 API를 검색하여 <strong className="text-heading">사용 설정</strong>:
+                <ul className="list-disc list-inside ml-6 mt-1 space-y-1">
+                  <li><strong>Google Sheets API</strong></li>
+                  <li><strong>Google Drive API</strong></li>
+                </ul>
+              </li>
+              <li>
+                <strong className="text-heading">API 및 서비스</strong> → <strong className="text-heading">사용자 인증 정보</strong> → <strong className="text-heading">서비스 계정 만들기</strong>
+                <div className="info-box mt-2 ml-6">
+                  <p className="text-sm text-blue-500 dark:text-blue-300">
+                    💡 서비스 계정 이름 예시: <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">mcp-sheets-controller</code>
+                  </p>
+                </div>
+              </li>
+              <li>역할(Role)은 <strong className="text-heading">편집자(Editor)</strong> 선택</li>
+              <li>
+                서비스 계정 → <strong className="text-heading">키 관리</strong> → <strong className="text-heading">새 키 만들기</strong> → <strong className="text-heading">JSON</strong> 선택 → 다운로드
+                <div className="warning-box mt-2 ml-6">
+                  <p className="text-xs text-orange-600 dark:text-orange-300">
+                    ⚠️ 이 JSON 키 파일은 비밀번호처럼 관리하세요. 절대 공개 저장소에 커밋하지 마세요!
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </StepCard>
+
+          <StepCard step={2} title="구글 시트에 서비스 계정 공유" description="서비스 계정이 접근할 수 있도록 시트를 공유합니다.">
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>사용하려는 Google Sheets 열기</li>
+              <li>오른쪽 상단 <strong className="text-heading">공유</strong> 버튼 클릭</li>
+              <li>
+                서비스 계정 이메일 입력 (예:{" "}
+                <code className="bg-surface-alt px-1.5 py-0.5 rounded text-accent text-xs">mcp-sheets-controller@프로젝트ID.iam.gserviceaccount.com</code>)
+              </li>
+              <li><strong className="text-heading">편집자</strong> 권한으로 공유</li>
+            </ol>
+            <div className="info-box mt-3">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 서비스 계정 이메일은 다운로드한 JSON 키 파일 안의{" "}
+                <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">client_email</code> 항목에서 확인할 수 있습니다.
+              </p>
+            </div>
+          </StepCard>
+
+          <StepCard step={3} title="uv 설치 (Python 패키지 매니저)" description="Google Sheets MCP 서버를 실행하기 위해 uv를 설치합니다.">
+            <CodeBlock
+              code={`# Mac / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`}
+              language="bash"
+            />
+            <div className="info-box mt-3">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 이미 <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">uv</code>가 설치되어 있다면 이 단계를 건너뛰세요.{" "}
+                <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">uv --version</code>으로 확인 가능합니다.
+              </p>
+            </div>
+          </StepCard>
+
+          <StepCard step={4} title="환경 변수 설정" description="서비스 계정 키 경로와 Drive 폴더 ID를 설정합니다.">
+            <CodeBlock
+              code={`# Mac / Linux
+export SERVICE_ACCOUNT_PATH="/path/to/your/service-account-key.json"
+export DRIVE_FOLDER_ID="YOUR_DRIVE_FOLDER_ID"
+
+# Windows PowerShell
+$env:SERVICE_ACCOUNT_PATH = "C:\\path\\to\\your\\service-account-key.json"
+$env:DRIVE_FOLDER_ID = "YOUR_DRIVE_FOLDER_ID"`}
+              language="bash"
+            />
+            <div className="info-box mt-3">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">DRIVE_FOLDER_ID</code>는 Google Drive 폴더 URL에서 확인할 수 있습니다.<br />
+                예: <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded text-[10px]">https://drive.google.com/drive/folders/<strong>여기가_폴더_ID</strong></code>
+              </p>
+            </div>
+          </StepCard>
+
+          <StepCard step={5} title="Google Sheets MCP 추가" description="Claude Code에 Google Sheets MCP를 등록합니다.">
+            <p className="text-sm text-muted mb-3"><strong className="text-heading">방법 1: Claude Code CLI로 추가</strong></p>
+            <CodeBlock
+              code={`claude mcp add google-sheets -- uvx mcp-google-sheets@latest`}
+              language="bash"
+            />
+            <div className="mt-4">
+              <p className="text-sm text-muted mb-3"><strong className="text-heading">방법 2: settings.json에 직접 추가</strong></p>
+              <CodeBlock
+                code={`{
+  "mcpServers": {
+    "google-sheets": {
+      "command": "uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        "SERVICE_ACCOUNT_PATH": "/path/to/your/service-account-key.json",
+        "DRIVE_FOLDER_ID": "YOUR_DRIVE_FOLDER_ID"
+      }
+    }
+  }
+}`}
+                language="json"
+                filename="~/.claude/settings.json"
+              />
+            </div>
+          </StepCard>
+
+          <StepCard step={6} title="테스트" description="구글 시트와 연동되는지 확인합니다.">
+            <CodeBlock
+              code={`# Claude Code 대화창에서
+> 구글 시트 목록을 보여줘
+
+> "매출 보고서" 시트에서 A1:D10 범위의 데이터를 가져와서 요약해줘
+
+> 새 구글 시트를 만들고 아래 데이터를 입력해줘:
+  이름, 부서, 직급
+  김철수, 개발팀, 시니어
+  이영희, 디자인팀, 리드`}
+              language="bash"
+              filename="Claude Code 세션"
+            />
+          </StepCard>
+        </div>
+
+        <div className="mt-6 bg-panel rounded-xl p-5 border border-edge">
+          <h3 className="font-semibold text-heading text-sm mb-3">Google Sheets MCP 주요 기능</h3>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              { icon: "📖", title: "시트 읽기", desc: "특정 범위의 데이터를 가져오기" },
+              { icon: "✏️", title: "시트 쓰기", desc: "셀 단위 또는 범위 단위로 데이터 입력" },
+              { icon: "📊", title: "시트 생성", desc: "새 스프레드시트 및 탭 생성" },
+              { icon: "🔄", title: "일괄 업데이트", desc: "여러 셀을 한번에 업데이트" },
+              { icon: "📋", title: "목록 조회", desc: "스프레드시트 및 시트 탭 목록 확인" },
+              { icon: "🗂️", title: "Drive 연동", desc: "Google Drive 폴더 기반 관리" },
+            ].map((item) => (
+              <div key={item.title} className="flex items-start gap-2">
+                <span className="text-sm">{item.icon}</span>
+                <div>
+                  <p className="text-xs font-medium text-heading">{item.title}</p>
+                  <p className="text-[11px] text-dim">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="warning-box mt-4">
+          <p className="text-sm text-orange-600 dark:text-orange-300">
+            <strong>⚠️ 보안 주의:</strong> 서비스 계정 JSON 키 파일은 절대 공개 저장소에 커밋하지 마세요.{" "}
+            <code className="bg-orange-100 dark:bg-orange-500/10 px-1 rounded">.gitignore</code>에{" "}
+            <code className="bg-orange-100 dark:bg-orange-500/10 px-1 rounded">*service-account*.json</code>을 추가하는 것을 권장합니다.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-12">
         <h2 className="text-2xl font-bold text-heading mb-6">MCP 설정 관리</h2>
         <CodeBlock
           code={`# 설치된 MCP 서버 목록 확인
@@ -372,9 +543,9 @@ cat ~/.claude/settings.json`}
           <ul className="text-sm text-accent space-y-1 list-disc list-inside">
             <li><strong>웹 개발:</strong> Context7 + Playwright + Filesystem + GitHub</li>
             <li><strong>프론트엔드 테스트:</strong> Playwright + Fetch + Context7</li>
-            <li><strong>데이터 분석:</strong> PostgreSQL + Fetch</li>
-            <li><strong>팀 협업:</strong> Lark + GitHub + Slack + Notion</li>
-            <li><strong>올인원:</strong> Context7 + Playwright + Filesystem + Fetch + GitHub</li>
+            <li><strong>데이터 분석:</strong> Google Sheets + PostgreSQL + Fetch</li>
+            <li><strong>팀 협업:</strong> Lark + Google Sheets + GitHub + Slack + Notion</li>
+            <li><strong>올인원:</strong> Context7 + Playwright + Google Sheets + Filesystem + Fetch + GitHub</li>
           </ul>
         </div>
       </section>
