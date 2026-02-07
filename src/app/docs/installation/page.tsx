@@ -1,6 +1,7 @@
 import PageHeader from "@/components/PageHeader";
 import StepCard from "@/components/StepCard";
 import CodeBlock from "@/components/CodeBlock";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -88,6 +89,14 @@ export default function InstallationPage() {
               <li><strong className="text-heading">Mac</strong> 버전 다운로드</li>
               <li>다운로드된 파일 실행 → 응용 프로그램 폴더로 드래그</li>
             </ol>
+            <div className="mt-4">
+              <YouTubeEmbed
+                videoId="vesxpfOAOCw"
+                title="VS Code 설치 방법"
+                channel="한국어"
+                description="VS Code를 다운로드하고 설치하는 과정을 영상으로 확인하세요."
+              />
+            </div>
           </StepCard>
 
           <StepCard
@@ -221,6 +230,14 @@ export default function InstallationPage() {
               <li><strong className="text-heading">Windows</strong> 버전 다운로드</li>
               <li>다운로드된 파일 실행 → 기본값으로 설치</li>
             </ol>
+            <div className="mt-4">
+              <YouTubeEmbed
+                videoId="vesxpfOAOCw"
+                title="VS Code 설치 방법"
+                channel="한국어"
+                description="VS Code를 다운로드하고 설치하는 과정을 영상으로 확인하세요."
+              />
+            </div>
           </StepCard>
 
           <StepCard
