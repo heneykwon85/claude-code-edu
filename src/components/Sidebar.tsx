@@ -12,6 +12,10 @@ const navigation = [
       { name: "소개", href: "/" },
       { name: "사전 설치", href: "/docs/installation" },
       { name: "스킬 개념 & 실습", href: "/docs/skills" },
+      { name: "  ∟ 스킬이란?", href: "/docs/skills/what-is-skill" },
+      { name: "  ∟ 공식 스킬 체험", href: "/docs/skills/official-skills" },
+      { name: "  ∟ 첫 스킬 만들기", href: "/docs/skills/first-skill" },
+      { name: "  ∟ 배포 및 공유", href: "/docs/skills/deploy-share" },
       { name: "기본 사용법", href: "/docs/basics" },
     ],
   },
@@ -93,7 +97,7 @@ export default function Sidebar({
                       href={item.href}
                       onClick={onClose}
                       className={`sidebar-link flex items-center px-6 py-2 text-[13px] ${
-                        pathname === item.href
+                        pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href + "/"))
                           ? "active font-medium"
                           : "sidebar-muted"
                       }`}

@@ -482,6 +482,60 @@ claude
         </div>
       </section>
 
+      {/* Sub-pages Navigation */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-6">단계별 실습 가이드</h2>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {[
+            {
+              step: "1-0",
+              title: "스킬이란?",
+              desc: "스킬의 핵심 개념, 동작 방식, SKILL.md 구조를 배웁니다.",
+              href: "/docs/skills/what-is-skill",
+              icon: "📖",
+            },
+            {
+              step: "1-1",
+              title: "공식 스킬 체험",
+              desc: "Vercel 공식 스킬을 설치하고 직접 사용해봅니다.",
+              href: "/docs/skills/official-skills",
+              icon: "⚡",
+            },
+            {
+              step: "1-2",
+              title: "첫 스킬 만들기",
+              desc: "커밋 메시지 컨벤션 스킬을 단계별로 직접 만들어봅니다.",
+              href: "/docs/skills/first-skill",
+              icon: "🛠️",
+            },
+            {
+              step: "1-3",
+              title: "배포 및 공유",
+              desc: "만든 스킬을 팀원과 공유하고 GitHub로 배포합니다.",
+              href: "/docs/skills/deploy-share",
+              icon: "🚀",
+            },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="bg-panel rounded-xl p-5 border border-edge hover:border-accent/30 hover:shadow-sm transition-all group block"
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">{item.icon}</span>
+                <div>
+                  <span className="text-[10px] text-dim font-medium">{item.step}</span>
+                  <h3 className="font-semibold text-heading text-sm mb-1 group-hover:text-accent transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-muted">{item.desc}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Quick Reference */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-heading mb-6">빠른 참고: 필수 명령어</h2>
@@ -494,9 +548,11 @@ mkdir -p ~/.claude/skills/my-skill
 mkdir -p .claude/skills/my-skill
 # → SKILL.md 작성
 
+# 공식 스킬 설치
+npx skills add vercel-labs/agent-skills
+
 # 설치된 스킬 목록 확인
-ls ~/.claude/skills/
-ls .claude/skills/
+npx skills list
 
 # Claude Code에서 스킬이 적용되는지 테스트
 claude
@@ -518,10 +574,10 @@ claude
           이전: 사전 설치
         </Link>
         <Link
-          href="/docs/basics"
+          href="/docs/skills/what-is-skill"
           className="px-6 py-2.5 bg-btn text-btn-text text-sm font-medium hover:bg-btn-hover transition-colors flex items-center gap-2"
         >
-          다음: 기본 사용법
+          다음: 스킬이란?
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
