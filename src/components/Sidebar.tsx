@@ -44,6 +44,7 @@ const navigation = [
       { name: "슬래시 명령어", href: "/docs/advanced/commands" },
       { name: "MCP 서버 연결", href: "/docs/advanced/mcp" },
       { name: "GitHub Actions", href: "/docs/advanced/github-actions" },
+      { name: "Automation 케이스", href: "/docs/advanced/automation-cases" },
     ],
   },
   {
