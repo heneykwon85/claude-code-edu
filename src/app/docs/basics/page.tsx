@@ -310,13 +310,13 @@ claude --resume`}
       {/* Navigation */}
       <div className="flex justify-between items-center pt-8 border-t border-edge">
         <Link
-          href="/docs/skills/deploy-share"
+          href="/docs/vibe-coding/summary"
           className="text-sm text-dim hover:text-heading transition-colors flex items-center gap-1"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          이전: 배포 및 공유
+          이전: 바이브 코딩 정리
         </Link>
         <Link
           href="/docs/workflows/understand"

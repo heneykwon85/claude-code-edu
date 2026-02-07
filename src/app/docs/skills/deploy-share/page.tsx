@@ -316,10 +316,10 @@ npx skills list`}
           이전: 첫 스킬 만들기
         </Link>
         <Link
-          href="/docs/basics"
+          href="/docs/vibe-coding"
           className="px-6 py-2.5 bg-btn text-btn-text text-sm font-medium hover:bg-btn-hover transition-colors flex items-center gap-2"
         >
-          다음: 기본 사용법
+          다음: 바이브 코딩 기초
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
