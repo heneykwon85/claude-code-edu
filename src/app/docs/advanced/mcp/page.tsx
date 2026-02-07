@@ -98,6 +98,11 @@ export default function McpPage() {
               pkg: "@modelcontextprotocol/server-puppeteer",
             },
             {
+              name: "Lark (라크/페이슈)",
+              desc: "메시지, 문서, 캘린더, Bitable 연동",
+              pkg: "@larksuiteoapi/lark-mcp",
+            },
+            {
               name: "Slack",
               desc: "Slack 메시지 보내기/읽기",
               pkg: "@modelcontextprotocol/server-slack",
@@ -114,6 +119,75 @@ export default function McpPage() {
               <code className="text-xs text-dim font-mono">{server.pkg}</code>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Lark MCP Setup */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-6">Lark(라크) MCP 연결하기</h2>
+        <div className="bg-accent/5 rounded-2xl p-6 border border-accent/20 mb-6">
+          <p className="text-body leading-relaxed mb-3">
+            <strong className="text-heading">Lark MCP</strong>는 Lark(라크/페이슈) Open Platform의
+            API를 MCP 도구로 제공합니다. 메시지 전송, 그룹 관리, 문서 작성, 캘린더, Bitable 등
+            Lark의 주요 기능을 Claude Code에서 자연어로 사용할 수 있습니다.
+          </p>
+        </div>
+
+        <h3 className="font-semibold text-body mb-3">1단계: Lark 앱 생성 및 자격 증명 확보</h3>
+        <div className="bg-panel rounded-xl p-4 border border-edge mb-6">
+          <ol className="text-sm text-muted space-y-2 list-decimal list-inside">
+            <li><a href="https://open.larksuite.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Lark Open Platform</a>에 접속하여 로그인</li>
+            <li>&quot;Create App&quot;으로 새 앱을 생성</li>
+            <li>앱의 <strong className="text-heading">App ID</strong>와 <strong className="text-heading">App Secret</strong>을 확인 (Credentials 탭)</li>
+            <li>필요한 권한(Scopes)을 추가하고 앱을 게시(Publish)</li>
+          </ol>
+        </div>
+
+        <h3 className="font-semibold text-body mb-3">2단계: Claude Code에 MCP 서버 추가</h3>
+        <CodeBlock
+          code={`# CLI로 바로 추가하기
+claude mcp add lark -- npx -y @larksuiteoapi/lark-mcp mcp \\
+  -a <YOUR_APP_ID> \\
+  -s <YOUR_APP_SECRET>`}
+          language="bash"
+          filename="터미널"
+        />
+
+        <h3 className="font-semibold text-body mb-3 mt-6">또는 설정 파일에 직접 추가</h3>
+        <CodeBlock
+          code={`{
+  "mcpServers": {
+    "lark_mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@larksuiteoapi/lark-mcp",
+        "mcp",
+        "-a", "<YOUR_APP_ID>",
+        "-s", "<YOUR_APP_SECRET>"
+      ]
+    }
+  }
+}`}
+          language="json"
+          filename=".claude/settings.json"
+        />
+
+        <h3 className="font-semibold text-body mb-3 mt-6">3단계: 테스트</h3>
+        <CodeBlock
+          code={`# Claude Code 대화창에서 테스트
+> Lark에서 내 캘린더 일정을 확인해줘
+> Lark 그룹에 "배포 완료" 메시지를 보내줘
+> Lark 문서에 오늘 회의록을 작성해줘`}
+          language="bash"
+          filename="Claude Code 세션"
+        />
+
+        <div className="tip-box mt-4">
+          <p className="text-sm text-accent">
+            <strong>💡 팁:</strong> Lark MCP는 App Access Token과 User Access Token 두 가지 인증을 지원합니다.
+            개인 작업은 User Token, 자동화 봇은 App Token을 사용하세요.
+          </p>
         </div>
       </section>
 
