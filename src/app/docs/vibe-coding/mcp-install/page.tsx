@@ -1,6 +1,7 @@
 import PageHeader from "@/components/PageHeader";
 import CodeBlock from "@/components/CodeBlock";
 import StepCard from "@/components/StepCard";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function McpInstallPage() {
@@ -258,6 +259,109 @@ cat ~/.claude/settings.json`}
             <strong>ℹ️ 참고:</strong> MCP 설정은{" "}
             <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">~/.claude/settings.json</code>에
             저장됩니다. 문제가 생기면 이 파일을 직접 편집할 수 있습니다.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-heading mb-6">VS Code에서 MCP 설정하기</h2>
+        <p className="text-muted mb-4">
+          CLI(<code className="bg-surface-alt px-1.5 py-0.5 rounded text-accent text-xs">claude mcp add</code>) 외에도{" "}
+          <strong className="text-heading">VS Code의 Claude Extension</strong>에서 직접 MCP를 설정할 수 있습니다.
+        </p>
+
+        <div className="space-y-6">
+          <StepCard step={1} title="settings.local.json 열기" description="VS Code에서 MCP 설정 파일을 엽니다.">
+            <ol className="list-decimal list-inside text-sm text-muted space-y-2">
+              <li>VS Code에서 <code className="bg-surface-alt px-1.5 py-0.5 rounded text-accent text-xs">Cmd + Shift + P</code> (Mac) 또는 <code className="bg-surface-alt px-1.5 py-0.5 rounded text-accent text-xs">Ctrl + Shift + P</code> (Windows)</li>
+              <li><strong className="text-heading">Preferences: Open User Settings (JSON)</strong> 검색 후 클릭</li>
+              <li>또는 프로젝트 루트의 <code className="bg-surface-alt px-1.5 py-0.5 rounded text-accent text-xs">.claude/settings.local.json</code> 파일을 직접 열기</li>
+            </ol>
+          </StepCard>
+
+          <StepCard step={2} title="MCP 서버 설정 추가" description="JSON 파일에 MCP 서버 정보를 직접 입력합니다.">
+            <CodeBlock
+              code={`{
+  "permissions": {
+    "allow": [
+      "mcp_playwright_browser_close",
+      "mcp_playwright_browser_evaluate",
+      "mcp_playwright_browser_take_screenshot",
+      "mcp_playwright_browser_snapshot",
+      "mcp_playwright_browser_wait_for",
+      "mcp_playwright_browser_click",
+      "mcp_playwright_browser_run_code",
+      "mcp_playwright_browser_type"
+    ]
+  },
+  "enabledMcpJsonServers": [
+    "context7"
+  ],
+  "enableAllProjectMcpServers": true
+}`}
+              language="json"
+              filename="settings.local.json"
+            />
+            <div className="info-box mt-3">
+              <p className="text-sm text-blue-500 dark:text-blue-300">
+                💡 <code className="bg-blue-100 dark:bg-blue-500/10 px-1 rounded">permissions.allow</code>에 MCP 도구 이름을 추가하면 매번 권한을 묻지 않고 자동 허용됩니다.
+              </p>
+            </div>
+          </StepCard>
+
+          <StepCard step={3} title="설정 확인" description="VS Code에서 설정이 제대로 적용되었는지 확인합니다.">
+            <p className="text-sm text-muted mb-3">
+              아래 스크린샷처럼 <code className="bg-surface-alt px-1.5 py-0.5 rounded text-accent text-xs">settings.local.json</code>에
+              MCP 권한과 활성화된 서버가 표시되면 성공입니다.
+            </p>
+            <div className="rounded-xl overflow-hidden border border-edge">
+              <Image
+                src="/vscode-mcp-settings.png"
+                alt="VS Code에서 settings.local.json을 통한 MCP 설정 화면 - Playwright 권한과 Context7 서버가 설정된 모습"
+                width={800}
+                height={500}
+                className="w-full h-auto"
+              />
+            </div>
+            <p className="text-xs text-dim mt-2 text-center">
+              VS Code에서 settings.local.json을 통해 Playwright MCP 권한과 Context7 서버를 설정한 예시
+            </p>
+          </StepCard>
+        </div>
+
+        <div className="mt-6 bg-panel rounded-xl p-5 border border-edge">
+          <h3 className="font-semibold text-heading text-sm mb-3">주요 설정 항목 설명</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-edge">
+                  <th className="text-left py-2 pr-4 text-heading font-medium">항목</th>
+                  <th className="text-left py-2 text-heading font-medium">설명</th>
+                </tr>
+              </thead>
+              <tbody className="text-muted">
+                <tr className="border-b border-edge">
+                  <td className="py-2 pr-4"><code className="text-xs bg-surface-alt px-1.5 py-0.5 rounded text-accent">permissions.allow</code></td>
+                  <td className="py-2">자동 허용할 MCP 도구 목록 (매번 승인 팝업 없이 실행)</td>
+                </tr>
+                <tr className="border-b border-edge">
+                  <td className="py-2 pr-4"><code className="text-xs bg-surface-alt px-1.5 py-0.5 rounded text-accent">enabledMcpJsonServers</code></td>
+                  <td className="py-2">활성화할 MCP 서버 이름 목록 (예: <code className="text-xs">&quot;context7&quot;</code>)</td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4"><code className="text-xs bg-surface-alt px-1.5 py-0.5 rounded text-accent">enableAllProjectMcpServers</code></td>
+                  <td className="py-2"><code className="text-xs">true</code>로 설정하면 프로젝트의 모든 MCP 서버를 자동 활성화</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="tip-box mt-4">
+          <p className="text-sm text-accent">
+            <strong>💡 CLI vs VS Code 설정 비교:</strong>{" "}
+            <code className="bg-accent/10 px-1 rounded">claude mcp add</code>는 빠르고 간편하지만,{" "}
+            <code className="bg-accent/10 px-1 rounded">settings.local.json</code>을 직접 편집하면 권한 자동 허용, 서버 활성화 등을 한번에 세밀하게 제어할 수 있습니다.
           </p>
         </div>
       </section>
