@@ -3,12 +3,12 @@ import Image from "next/image";
 import Logo from "@/components/Logo";
 
 const features = [
-  { title: "빠른 설치", description: "한 줄의 명령어로 설치 완료. 5분 안에 시작할 수 있습니다.", href: "/docs/installation" },
-  { title: "쉬운 사용법", description: "자연어로 대화하듯 코딩하세요. 복잡한 명령어를 외울 필요가 없습니다.", href: "/docs/basics" },
-  { title: "코드 이해", description: "새로운 프로젝트도 순식간에 파악. Claude가 코드베이스를 분석합니다.", href: "/docs/workflows/understand" },
-  { title: "버그 수정", description: "에러 메시지를 붙여넣기만 하면 Claude가 원인을 찾아 수정합니다.", href: "/docs/workflows/bugfix" },
-  { title: "리팩토링", description: "코드 품질을 높이고 싶다면? Claude에게 자연어로 요청하세요.", href: "/docs/workflows/refactor" },
-  { title: "자동화", description: "GitHub Actions, MCP 서버 등 고급 자동화 기능을 활용하세요.", href: "/docs/advanced/github-actions" },
+  { title: "사전 설치", description: "Claude Code와 VS Code 설치부터 Extension 설정까지. 15분이면 준비 완료.", href: "/docs/installation" },
+  { title: "스킬 개념 & 실습", description: "Claude Code Skills로 반복 작업을 자동화하세요. 첫 스킬 만들기부터 배포까지.", href: "/docs/skills" },
+  { title: "바이브 코딩 기초", description: "자연어로 코딩하는 새로운 패러다임. CLAUDE.md, MCP, 필수 기능을 익힙니다.", href: "/docs/vibe-coding" },
+  { title: "기본 사용법", description: "대화하듯 코딩하세요. 복잡한 명령어 없이 자연어로 원하는 코드를 만듭니다.", href: "/docs/basics" },
+  { title: "MCP 서버 연결", description: "GitHub, Slack, Google Sheets 등 외부 서비스와 Claude를 연결합니다.", href: "/docs/advanced/mcp" },
+  { title: "Automation 케이스", description: "블로그 자동 발행, 뉴스레터, 광고 리포팅 등 실무 자동화 사례를 살펴봅니다.", href: "/docs/advanced/automation-cases" },
 ];
 
 const steps = [
